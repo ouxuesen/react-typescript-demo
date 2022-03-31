@@ -1,0 +1,25 @@
+.board-table{
+  display: table;
+  margin: auto;
+}
+.square-class{
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 34px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 34px;
+    background-color: bisque;
+}
+.square-class-black{
+  background-color: #fff;
+}
+.line-class{
+
+}
