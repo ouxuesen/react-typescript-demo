@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-03-29 17:42:20
- * @LastEditTime: 2022-03-30 17:56:45
+ * @LastEditTime: 2022-04-07 18:27:54
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/component/SaoLei/interfacePros.ts

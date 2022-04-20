@@ -1,0 +1,133 @@
+.item1 {
+  grid-area: header;
+}
+.item2 {
+  grid-area: menu;
+}
+.item3 {
+  grid-area: main;
+}
+.item4 {
+  grid-area: right;
+}
+.item5 {
+  grid-area: footer;
+}
+
+.grid-container {
+  display: grid;
+  grid:
+    "header header header header header header"
+    "menu main main main right right"
+    "menu footer footer footer footer footer";
+  grid-gap: 10px;
+  background-color: #2196f3;
+  padding: 10px;
+}
+@media screen and (max-width: 1000px) {
+  .grid-container {
+    display: grid;
+    grid:
+      "header header header header header header"
+      "menu main main main right right"
+      "menu footer footer footer footer";
+    grid-gap: 10px;
+    background-color: red;
+    padding: 10px;
+    clear: both;
+  }
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+.grid-container-1 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196f3;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+.splite-dev {
+  border-top: 1px dashed #2196f3;
+  width: 100%;
+  margin: 10px 0;
+}
+/*  */
+.content-root {
+}
+.root-herad {
+  box-sizing: border-box;
+  height: 100px;
+  padding: 40px;
+  text-align: center;
+}
+.root-herad::before {
+  content: "这是个标题";
+}
+.root-navi {
+  background-color: black;
+  padding: 1rem;
+}
+.navi-link {
+  color: white;
+  margin: auto 1rem;
+}
+.navi-link:hover {
+  color: #2196f3;
+}
+.navi-link-right {
+  float: right;
+}
+.root-body {
+  float: left;
+  width: 75%;
+  padding: 1rem;
+}
+.root-body-card {
+  /* box-shadow: 1px 1px 5px gainsboro; */
+  margin-top: 2rem;
+  border-radius: 1rem;
+  border: 1px solid beige;
+  padding: 2rem;
+  background-color: snow;
+}
+.root-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.card-top {
+  font-size: 1.1rem;
+}
+.card-img {
+  height: 100px;
+  width: 100%;
+  background-color: gray;
+}
+.car-sub {
+}
+.root-tips {
+  float: right;
+  width: 25%;
+  margin-top: 1rem;
+}
+.root-foot {
+  background-color: black;
+  height: 1rem;
+}
+@media screen and (max-width: 800px) {
+  .root-tips, .root-body {
+    width: 100%;
+  }
+}

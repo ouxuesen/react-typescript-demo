@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-03-22 15:52:01
- * @LastEditTime: 2022-03-31 12:05:58
+ * @LastEditTime: 2022-04-07 18:06:45
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/component/SaoLei/SBoard.tsx
@@ -47,6 +47,8 @@ const SBoard: React.FC = () => {
                     if (!dirItem.isLei&&dirItem.number==0&&!dirItem.status){
                         dirItem.status = true
                         blankDeail(dirItem,list)
+                    }else{
+                        dirItem.status = true
                     }
                 }
             })

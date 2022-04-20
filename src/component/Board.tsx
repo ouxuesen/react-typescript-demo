@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-03-18 18:33:21
- * @LastEditTime: 2022-03-22 15:49:20
+ * @LastEditTime: 2022-04-07 10:39:12
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/component/Board.tsx
@@ -9,7 +9,7 @@
  */
 import React from "react";
 import Square from "./Square";
-const   rowLines:number = 3
+const rowLines: number = 3
 class Board extends React.Component {
     // constructor(props:any) {
     //     super(props)
@@ -19,13 +19,13 @@ class Board extends React.Component {
     // }
 
     state = {
-        squares: Array(rowLines*rowLines).fill(null),
+        squares: Array(rowLines * rowLines).fill(null),
         xIsNext: true,
         status: 'Next player :X'
     }
     reset() {
         this.setState({
-            squares: Array(rowLines*rowLines).fill(null),
+            squares: Array(rowLines * rowLines).fill(null),
             xIsNext: true,
             status: 'Next player :X',
         })
@@ -84,9 +84,9 @@ class Board extends React.Component {
                     <button className="btnCenter" onClick={() => {
                         this.reset()
                     }}>重置</button>
-                    </div>
                 </div>
-                )
+            </div>
+        )
     }
 }
-                export default Board
+export default Board

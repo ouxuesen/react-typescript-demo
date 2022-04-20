@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-03-30 16:45:26
- * @LastEditTime: 2022-03-30 17:42:12
+ * @LastEditTime: 2022-04-07 18:18:43
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/component/SaoLei/SGame.tsx
@@ -12,7 +12,9 @@ import './index.css'
 import SBoard from "./SBoard";
 const SGame = () => {
   return (
-    <div>
+    <div onContextMenu={(e)=>{
+      e.preventDefault()
+      return false}} >
         <SBoard></SBoard>
     </div>
   )

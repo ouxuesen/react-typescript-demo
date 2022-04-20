@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-03-21 17:06:53
- * @LastEditTime: 2022-03-30 16:48:21
+ * @LastEditTime: 2022-04-18 15:40:57
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/component/MyNavigation.tsx
@@ -22,8 +22,10 @@ const MyNavigation: React.FC<{}> = () => {
                             <Nav.Link href="/detail">details</Nav.Link>
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/sgame">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                                <NavDropdown.Item href="/test">test</NavDropdown.Item>
+                                <NavDropdown.Item href="/app">app</NavDropdown.Item>
+                                <NavDropdown.Item href="/holidayEle">日历</NavDropdown.Item>
+                                
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                             </NavDropdown>

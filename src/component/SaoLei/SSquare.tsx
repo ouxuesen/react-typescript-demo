@@ -70,7 +70,7 @@ const SUnite = (props:{item:SaoLeiPros}) => {
   return (
     <button className={!item.isLei&&item.number==0&&item.status?'square-class square-class-black':'square-class'} onClick={(e)=>{
       item.onClick?item.onClick(item):null
-    }}>{!item.status?'':(item.isLei?'*':(item.number==0?'':item.number+''))}</button>
+    }} >{!item.status?'':(item.isLei?'*':(item.number==0?'':item.number+''))}</button>
   )
 }
 
