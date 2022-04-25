@@ -1,0 +1,39 @@
+:root {
+    --default-widht: 80px;
+}
+.default-content{
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+}
+.default-heard{
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+}
+.default-overlay {
+    display: grid;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+    /* width: calc(var(--default-widht) * 3);
+    height: calc(var(--default-widht) * 3); */
+    border-collapse:collapse ;
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 10px;
+    
+}
+.default-plot {
+    width: var(--default-widht);
+    height: var(--default-widht);
+    line-height: var(--default-widht);
+    text-align: center;
+    background-color: white;
+    /* border: 1px solid #eee; */
+}
+.btn-continer{
+    text-align: center;
+}

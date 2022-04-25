@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-18 17:28:25
- * @LastEditTime: 2022-04-20 14:25:34
+ * @LastEditTime: 2022-04-20 17:39:18
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/elsfk/index.ts
@@ -18,7 +18,6 @@ const createModel = (points: { x: number, y: number }[]) => {
     model.setPoints(points)
     return model
 }
-export const ElsModel_0 = createModel([])
 export const ElsModel_1 = createModel([{ x: 1, y: 1 }, { x: 2, y: 1 }, { x: 2, y: 2 }, { x: 3, y: 2 }])
 export const ElsModel_2 = createModel([{ x: 1, y: 1 }, { x: 0, y: 0 }, { x: 0, y: 1 }, { x: 0, y: 2 }])
 export const ElsModel_3 = createModel([{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 3, y: 0 }])

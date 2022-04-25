@@ -1,0 +1,79 @@
+
+:root{
+--board-color :red;
+--dusu-width:450px
+}
+.sd-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sd-overlay{
+    display: grid;
+    box-sizing: content-box;
+    width: var(--dusu-width);
+    height: var(--dusu-width);
+    grid-template-columns: 11.11% 11.11% 11.11% 11.11% 11.11% 11.11% 11.11% 11.11% 11.11%;
+    grid-template-rows: 11.11% 11.11% 11.11% 11.11% 11.11% 11.11% 11.11% 11.11% 11.11%;
+    /* grid-column-gap: 0.5px;
+    grid-row-gap: 0.6px; */
+    background-color: #e2e2e2;
+    /* border-radius: 10px; */
+    border-collapse: collapse;
+    border: var(--board-color) 1px solid;
+    border-right: none;
+    border-bottom: none;
+    margin: 20px 0;
+}
+.sd-overlay a{
+    width:calc(var(--dusu-width)/9);
+    height: calc(var(--dusu-width)/9);
+    text-align: center;
+    border: #e2e2e2 0.5px dashed;
+    text-decoration: none;
+}
+.es-plot{
+   line-height: calc(var(--dusu-width)/9);
+   font-size: 1rem;
+   font-weight: 600;
+   background-color: white;
+}
+.es-plot-active{
+    border: 1px solid saddlebrown;
+    background-color: red;
+}
+.sd-overlay a:nth-child(3n){
+    border-right: var(--board-color) 1px solid;
+}
+
+.sd-overlay a:nth-child(27n){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-1){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-2){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-3){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-4){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-5){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-6){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-7){
+    border-bottom: var(--board-color) 1px solid;
+}
+.sd-overlay a:nth-child(27n-8){
+    border-bottom: var(--board-color) 1px solid;
+}
+.btn-continer{
+    margin: 1rem 0;
+}
