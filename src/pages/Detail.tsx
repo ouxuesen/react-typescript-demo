@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-03-21 16:43:03
- * @LastEditTime: 2022-04-07 16:01:56
+ * @LastEditTime: 2022-04-27 15:21:10
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/Detail.tsx
@@ -10,6 +10,8 @@
 import React, { useReducer, useState } from 'react'
 import { Button } from "react-bootstrap";
 import PagInation from "../component/Pagination/PagInation";
+import TodoList from "./animal/index";
+import SpringAnimal from './animal/springAnimal'
 type Props = {
     value: number
 }
@@ -71,6 +73,8 @@ function reducer(state: { count: number}, action: { type: actiontype,payload?:nu
                     console.log('点击了上下页',btnType)
                 }
             }}></PagInation>
+            <TodoList></TodoList>
+            <SpringAnimal></SpringAnimal>
         </div>
     );
 }

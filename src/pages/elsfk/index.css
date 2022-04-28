@@ -32,6 +32,11 @@
     width: var(--els--width);
     height: var(--els--width);
 }
+.els-plot-active {
+    background-color: snow !important;
+    /* border: 0.5px solid #e2e2e2; */
+    /* opacity: 0.1; */
+}
 .els-overlay {
     background-color: #e2e2e2;
     border-collapse: collapse;
@@ -41,10 +46,12 @@
     border: 0.5px solid #e2e2e2;
 }
 .block .els-plot {
-    background-color: #333;
+    background-color: #999;
+    border: 0.5px solid #e2e2e2;
 }
 .move-block .els-plot {
-    background-color: red;
+    background-color: #333;
+    border: 0.5px solid #e2e2e2;
 }
 .starBtn {
 }
@@ -59,7 +66,7 @@
     display: table;
     clear: both;
 }
-.elsfk-continer{
+.elsfk-continer {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -70,14 +77,15 @@
     box-sizing: content-box;
     /* background-color: #e2e2e2; */
 }
-.score-board-point{
+.score-board-point {
     position: relative;
     width: 100px;
     height: 100px;
     box-sizing: content-box;
 }
 
-.els-overlay-score, .score-block{
+.els-overlay-score,
+.score-block {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 25% 25% 25% 25%;
@@ -85,7 +93,7 @@
     /* grid-row-gap: 0.5px;
     grid-column-gap: ; */
 }
-.score-block{
+.score-block {
     position: absolute;
     /* background-color: aqua; */
     top: 0;
@@ -93,20 +101,35 @@
     width: 100%;
     height: 100%;
 }
-.score-plot{
+.score-plot {
     width: 25px;
     height: 25px;
     border: 0.5px solid #e2e2e2;
 }
-.score-block .score-plot{
+.score-block .score-plot {
     background-color: #666;
 }
-.els-overlay-score .score-plot{
+.els-overlay-score .score-plot {
     background-color: white;
     /* border: 0.5px solid #e2e2e2; */
 }
-.score-div{
+.score-div {
     color: #333;
     font-weight: 600;
     text-align: center;
+}
+
+.block-css-enter {
+    opacity: 0;
+}
+.block-css-enter-active {
+    opacity: 1;
+    /* transition: opacity 500ms ease-in; */
+}
+.block-css-exit {
+    opacity: 1;
+}
+.block-css-exit-active {
+    opacity: 0;
+    transition:  opacity 500ms ease-in;
 }

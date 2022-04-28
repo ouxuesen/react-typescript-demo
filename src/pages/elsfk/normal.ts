@@ -1,23 +1,23 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-18 17:29:18
- * @LastEditTime: 2022-04-20 14:17:09
+ * @LastEditTime: 2022-04-26 18:22:39
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/elsfk/normal.ts
  * 一路向前
  */
 import * as _ from 'lodash'
-import { rol_x } from '.';
+import { rol_x, rol_y } from './index';
 export class ElsBaseClass {
     _degre_x: number;
-    _degre_y:number;
+    _degre_y: number;
     _matrix: number[][] = [];
     _matrixArray: number[];
-    constructor(degree_x: number,degree_y: number) {
+    constructor(degree_x: number, degree_y: number) {
         this._degre_x = degree_x
         this._degre_y = degree_y
-        this._matrixArray = Array(degree_x*degree_y).fill(0)
+        this._matrixArray = Array(degree_x * degree_y).fill(0)
         this.asyncMatrix()
     }
     //同步矩阵
@@ -59,20 +59,20 @@ export class ElsBaseClass {
             }
         })
         tempDele.forEach(y => {
-            this._matrix.splice(y,1)
-            this._matrix.splice(0,0,Array(this._degre_x).fill(0))
+            this._matrix.splice(y, 1)
+            this._matrix.splice(0, 0, Array(this._degre_x).fill(0))
         })
         this.asyncMatrixArray()
         return tempDele
     }
-    reset(){
-        this._matrixArray = Array(this._degre_x*this._degre_y).fill(0)
+    reset() {
+        this._matrixArray = Array(this._degre_x * this._degre_y).fill(0)
         this.asyncMatrix()
     }
 
 }
 
-const reset_x = (10-4)/2
+const reset_x = (10 - 4) / 2
 const reset_y = -2
 //模型
 export class ElsModelClass extends ElsBaseClass {
@@ -98,52 +98,79 @@ export class ElsModelClass extends ElsBaseClass {
             return total.concat(current)
         })
     }
+    canRate90(superPoints: number[]) {
+        let tempMatrixArray = this.matrixReverse(this.matrixDisplace())
+        //获取反转后的坐标点
+        let tempPoints: { x: number, y: number }[] = []
+        let degredd = this._degre_x
+        tempMatrixArray.forEach((item, index) => {
+            if (item === 1) {
+                let x = index % degredd
+                let y = parseInt(`${index / degredd}`)
+                tempPoints.push({ x:x+this.sup_x, y:y+this.sup_y })
+            }
+        })
+       return  !tempPoints.some(({ x, y }) => {
+            return superPoints[y * rol_x + x] == 1
+        })
+
+    }
     //90route
     rotate90() {
         this._matrixArray = this.matrixReverse(this.matrixDisplace())
         this.asyncMatrix()
         let maxPoint = this.getMaxPoint()
         //防止反转出边界
-        if(maxPoint.x>rol_x-1){
-            this.sup_x = this.sup_x - (maxPoint.x-rol_x+1)
+        if (maxPoint.x >= rol_x) {
+            this.sup_x = this.sup_x - (maxPoint.x - rol_x + 1)
+        }
+        if (maxPoint.y >= rol_y) {
+            this.sup_y = this.sup_y - (maxPoint.y - rol_y + 1)
+        }
+        let minPoint = this.getMinPoint()
+        if (minPoint.x < 0) {
+            this.sup_x = 0
+        }
+        if(minPoint.y<0){
+            this.sup_y = 0
         }
         return this
     }
     //转换坐标点的
-    getSupPoints():{x:number,y:number}[]{
-        return this.getPoints().map(({x,y})=>{
-            return {x:x+this.sup_x,y:y+this.sup_y}
+    getSupPoints(): { x: number, y: number }[] {
+        return this.getPoints().map(({ x, y }) => {
+            return { x: x + this.sup_x, y: y + this.sup_y }
         })
     }
-    getMaxPoint():{x:number,y:number}{
+    getMaxPoint(): { x: number, y: number } {
         let points = this.getSupPoints()
         let max_x = 0
         let max_y = 0
-        points.forEach(point=>{
-            if(point.x>max_x){
+        points.forEach(point => {
+            if (point.x > max_x) {
                 max_x = point.x
             }
-            if(point.y>max_y){
+            if (point.y > max_y) {
                 max_y = point.y
             }
         })
-        return {x:max_x,y:max_y}
+        return { x: max_x, y: max_y }
     }
-    getMinPoint():{x:number,y:number}{
+    getMinPoint(): { x: number, y: number } {
         let points = this.getSupPoints()
         let min_x = points[0].x
         let min_y = points[0].y
-        points.forEach(point=>{
-            if(point.x<min_x){
+        points.forEach(point => {
+            if (point.x < min_x) {
                 min_x = point.x
             }
-            if(point.y<min_y){
+            if (point.y < min_y) {
                 min_y = point.y
             }
         })
-        return {x:min_x,y:min_y}
+        return { x: min_x, y: min_y }
     }
-    reset(){
+    reset() {
         this.sup_x = reset_x
         this.sup_y = reset_y
     }

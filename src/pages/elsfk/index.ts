@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-18 17:28:25
- * @LastEditTime: 2022-04-20 17:39:18
+ * @LastEditTime: 2022-04-26 18:20:19
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/elsfk/index.ts
@@ -27,7 +27,7 @@ export const rol_x = 10
 export const rol_y = 20
 export const ElsBoard = new ElsBaseClass(rol_x, rol_y)
 //边界碰撞问题 目前x y只能是1或者0
-export type stateType = 'start' | 'starting' | 'end'
+export type stateType = 'start' | 'starting'|'paus' | 'end'
 export function move(x: number, y: number, model: ElsModelClass, callBack: (deleLines: number[], state?: stateType) => void) {
     let maxpoint = model.getMaxPoint()
     let minPoint = model.getMinPoint()
@@ -78,6 +78,11 @@ export function move(x: number, y: number, model: ElsModelClass, callBack: (dele
     }
 
 
+}
+export function rotate90(model: ElsModelClass){
+    if(model.canRate90(ElsBoard._matrixArray)){
+        model.rotate90()
+    }
 }
 export const onKeyDown = () => {
     document.onkeydown = function (event) {

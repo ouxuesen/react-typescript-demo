@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-22 10:24:38
- * @LastEditTime: 2022-04-25 16:12:00
+ * @LastEditTime: 2022-04-28 12:11:38
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/shudu/sdmodel.ts
@@ -13,6 +13,10 @@ const rolNum = 9
 const bNum = 3
 const allNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+interface SDuniteInterface {
+    num:number,
+    type:'init'|'blank'|'eide'
+}
 export class SDModel {
     _matrixArray: number[];
     _xArray: number[][];
@@ -149,8 +153,6 @@ export class SDModel {
             if (num == -1) {
                 this._currentIndex = this._currentIndex - 1
                 this.update(this._currentIndex, num, true)
-                // this._matrixArray[this._currentIndex] = num
-                // this.update(this._currentIndex, num)
             } else {
                 this._matrixArray[this._currentIndex] = num
                 this.update(this._currentIndex, num)

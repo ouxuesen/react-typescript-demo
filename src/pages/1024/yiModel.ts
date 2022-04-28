@@ -1,16 +1,19 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-24 14:39:49
- * @LastEditTime: 2022-04-25 15:21:30
+ * @LastEditTime: 2022-04-26 16:16:46
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/1024/yiModel.ts
  * 一路向前
  */
 import _ from 'lodash'
+import {v1} from 'uuid';
 export interface boardModel {
     num: number,
-    type: 'none' | 'init' | 'add',
+    type: 'none' | 'init' | 'add' | 'move',
+    moveIndex?:number
+    id:string
 }
 export type pointType = {
     x: number,
@@ -30,6 +33,7 @@ class DefulatModel {
         return {
             num: 0,
             type: 'none',
+            id:v1()
         }
     }
     //换算坐标
@@ -138,10 +142,14 @@ class DefulatModel {
                         let lmodel = this._matrixArray[this.acoordinates(movePoint)]
                         if(lmodel.type === 'none'){
                             this.setPoint(movePoint,omodel.num)
+                            lmodel.type = 'move'
+                            lmodel.moveIndex = this.acoordinates(currentPoint)
                             this.setPointNone(currentPoint)
                         }else if(lmodel.num === omodel.num){
                             lmodel.num = lmodel.num+omodel.num
                             score += lmodel.num 
+                            lmodel.type = 'move'
+                            lmodel.moveIndex = this.acoordinates(currentPoint)
                             this.setPointNone(currentPoint)
                         }
 

@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-24 14:40:06
- * @LastEditTime: 2022-04-25 16:07:58
+ * @LastEditTime: 2022-04-27 10:39:21
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/1024/game.tsx
@@ -74,9 +74,8 @@ const DefaultGame = (props: Props) => {
     if (model.canmove(direction)) {
        let curetns = model.move(direction)
        curetns = state.score + curetns
-       
-      if (model.canmoveAll()) {
-        model.getRandom()
+       model.getRandom()
+      if (!model.canmoveAll()) {
         dispatch({
           type: 'update',
           payload: {
@@ -128,7 +127,11 @@ const DefaultGame = (props: Props) => {
         <div><span>得分：{state.score}</span></div>
         <div><span>状态：{state.statues}</span>{'  '}<span> 时间：{state.time}</span></div>
       </div>
-      <div className='default-content'>
+      <div className='default-content' onMouseDown={(e)=>{
+        debugger
+      }} onTouchStart={()=>{
+        debugger
+      }}>
         <OverlayBoard list={state.points} degre={state.degre}></OverlayBoard>
       </div>
       <div className='btn-continer'>

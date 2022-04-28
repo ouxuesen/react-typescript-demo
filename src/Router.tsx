@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-03-21 16:45:42
- * @LastEditTime: 2022-04-18 15:40:27
+ * @LastEditTime: 2022-04-25 16:25:50
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/Router.tsx
@@ -29,7 +29,7 @@ export default class Router extends React.Component {
         <MyNavigation />
         <Container >
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Game />} />
           <Route path="/home" element={<Home />} />
           <Route path="/detail" element={<Detail />} />
           <Route path="/app" element={<App />} />

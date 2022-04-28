@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-22 17:54:37
- * @LastEditTime: 2022-04-24 14:38:23
+ * @LastEditTime: 2022-04-25 16:29:14
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/shudu/suGame.tsx
@@ -46,7 +46,7 @@ function SDGame() {
             clearInterval(interVal as NodeJS.Timer)
         }
     }, [])
-   
+
     return (
         <div className='sd-main'>
             <div className='sugame-heard'>
@@ -95,18 +95,16 @@ function SDGame() {
                 model.fillRaodm()
                 if (interVal == null) {
                     interVal = setInterval(() => {
-                        if (interVal === null) {
-                            return
+                        if (timeflycount ===undefined) {
+                            timeflycount = 0
                         }
-                        if (timeflycount != null) {
-                            timeflycount++
-                            let gaps = moment.duration(timeflycount, "seconds")
-                            dispatch({
-                                type: 'update', payload: {
-                                    time: moment({ h: gaps.hours(), m: gaps.minutes(), s: gaps.seconds() }).format('HH:mm:ss') || '00:00:00'
-                                }
-                            })
-                        }
+                        (timeflycount as number)++
+                        let gaps = moment.duration(timeflycount, "seconds")
+                        dispatch({
+                            type: 'update', payload: {
+                                time: moment({ h: gaps.hours(), m: gaps.minutes(), s: gaps.seconds() }).format('HH:mm:ss') || '00:00:00'
+                            }
+                        })
 
                     }, 1000)
                 }

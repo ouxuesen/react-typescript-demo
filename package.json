@@ -19,8 +19,12 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.1",
     "react-dom": "^17.0.2",
+    "react-flip-toolkit": "^7.0.13",
     "react-scripts": "5.0.0",
+    "react-spring": "^9.4.4",
+    "react-transition-group": "^4.4.2",
     "typescript": "^4.6.2",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -31,8 +35,7 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache"
   },
   "eslintConfig": {
-    "extends": [
-    ]
+    "extends": []
   },
   "browserslist": {
     "production": [
@@ -48,6 +51,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.181",
+    "@types/uuid": "^8.3.2",
     "react-router-dom": "^6.2.2",
     "sass": "^1.49.11"
   }
