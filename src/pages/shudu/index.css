@@ -1,6 +1,6 @@
 
 :root{
---board-color :red;
+--board-color :#333;
 --dusu-width:450px
 }
 .sd-main{
@@ -41,7 +41,7 @@
 }
 .es-plot-active{
     border: 1px solid saddlebrown;
-    background-color: red;
+    background-color: red !important;
 }
 .sd-overlay a:nth-child(3n){
     border-right: var(--board-color) 1px solid;
@@ -76,4 +76,25 @@
 }
 .btn-continer{
     margin: 1rem 0;
+}
+.level-class{
+    padding: 1rem;
+    text-decoration:none;  
+    color: #333;
+    font-weight: 600;
+}
+.level-div-class{
+    margin-top: 20px;
+}
+.level-class::before{
+    content: '等级：';
+}
+.level-class-active{
+    color: #0d6efd;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.es-plot-eide{
+    border: 1px solid saddlebrown;
+    background-color: #e2e2e2 !important;
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-11 11:22:15
- * @LastEditTime: 2022-04-18 12:25:07
+ * @LastEditTime: 2022-04-29 14:54:01
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/holiday/services.ts
@@ -10,8 +10,8 @@
 import { type } from "os";
 import axios from "../../request/myAxios";
 const requestParams = {
-    app_id: 'niwguxhxmtjnqkwr',
-    app_secret: 'SE9YWERRTEI0amtGT0RPVWlYaVUrZz09'
+    app_id: 'poxfi8kdgsnkdxew',
+    app_secret: 'VkhOdlhzOXMyUDlXYnJMR0tSQ0JrZz09'
 }
 interface responseBase<T>{
     code: number;

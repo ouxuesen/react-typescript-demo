@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-26 11:01:38
- * @LastEditTime: 2022-04-26 15:34:49
+ * @LastEditTime: 2022-04-29 11:31:06
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/animal/index.tsx
@@ -21,6 +21,7 @@ import {
 import {v1} from 'uuid';
 
 import './index.css';
+import { animated, useSpring } from '@react-spring/web'
 
 function TodoList() {
   const [items, setItems] = useState([

@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-22 10:24:38
- * @LastEditTime: 2022-04-28 12:11:38
+ * @LastEditTime: 2022-04-28 18:44:41
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/shudu/sdmodel.ts
@@ -11,71 +11,62 @@
 import _, { List, max } from 'lodash'
 const rolNum = 9
 const bNum = 3
-const allNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-interface SDuniteInterface {
-    num:number,
-    type:'init'|'blank'|'eide'
+const allNumber: SDuniteInterface[] = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+    return {
+        num: item,
+        type: 'init',
+        index: -1,
+        id:index
+    }
+})
+export interface SDuniteInterface {
+    num: number,
+    type: 'init' | 'blank' | 'eide',
+    index: number,
+    id?:number
+}
+export interface pointInterface {
+    x: number,
+    y: number,
+    b: number,
 }
 export class SDModel {
-    _matrixArray: number[];
-    _xArray: number[][];
-    _yArray: number[][];
-    _bArray: number[][];
-    _resultArray: number[] = []
+    _matrixArray: SDuniteInterface[];
+    _resultArray: SDuniteInterface[] = []
     _currentIndex: number = 0
-    _logs:{[index:number]:number[]} ={ }
+    _countss:number =0
+    _shuffleArray:number[]= []
+    _logs: { [index: number]: SDuniteInterface[] } = {}
     constructor(_rolNum: number = rolNum) {
-        this._matrixArray = Array(Math.pow(_rolNum, 2)).fill(0)
-        this._xArray = Array(rolNum)
-        this._yArray = Array(rolNum)
-        this._bArray = Array(rolNum)
-        Array(rolNum).fill(null).forEach((ele, index) => {
-            this._xArray[index] = []
-            this._yArray[index] = []
-            this._bArray[index] = []
-        });
-
+        this._matrixArray = Array(Math.pow(_rolNum, 2)).fill(0).map((item, index) => {
+            return {
+                num: 0,
+                type: 'init',
+                index: index,
+                id:index,
+            }
+        })
     }
     //board添加值更新
-    update(index: number, num: number, dele: boolean = false) {
-        let { x, y, b } = this.coordinates(index)
-        if (!dele) {
-            if(num>0){
-                this._xArray[x].push(num)
-                this._yArray[y].push(num)
-                this._bArray[b].push(num)
+    getBlockArray({ _x, _y, _b}: { _x?: number, _y?: number, _b?: number }): SDuniteInterface[] {
+        return this._matrixArray.filter((item: SDuniteInterface, index: number) => {
+            let { x, y, b } = this.coordinates(index)
+            let result = true
+            if (_x != undefined) {
+                result = _x === x && result
             }
-        } else {
-            if(num==-1){
-                if (this._xArray[x].length) {
-                    this._xArray[x].pop()
-                }
-                if (this._yArray[y].length) {
-                    this._yArray[y].pop()
-                }
-                if (this._bArray[b].length) {
-                    this._bArray[b].pop()
-                }
-            }else{
-                let findex = this._xArray[x].indexOf(num)
-                if(findex!=-1){
-                    this._xArray[x].splice(findex,1)
-                }
-                let findex_y = this._yArray[y].indexOf(num)
-                if(findex_y!=-1){
-                    this._yArray[y].splice(findex_y,1)
-                }
-                let findex_b = this._bArray[b].indexOf(num)
-                if(findex_b!=-1){
-                    this._bArray[b].splice(findex_b,1)
-                }
+            if (_y != undefined) {
+                result = _y === y && result
+            }
+            if (_b != undefined) {
+                result = _b === b && result
+            }
+            return result && item.num != 0 && item.type!='blank'
+        })
 
-            }
-        }
     }
 
-    coordinates(index: number): { x: number, y: number, b: number } {
+    coordinates(index: number): pointInterface {
         let x, y, b = 0
         x = index % rolNum
         y = Math.floor(index / rolNum)
@@ -84,24 +75,32 @@ export class SDModel {
         return { x, y, b }
     }
     matrix(): number[][] {
-        return _.chunk(this._matrixArray, rolNum)
+        return _.chunk(this._matrixArray.map(item => item.num), rolNum)
     }
-    getFillArray(index: number): number[] {
+    matrixLog(): { [index: number]: number[] } {
+        return _.mapValues(this._logs, (o) => o.map(item => item.num))
+    }
+    getFillArray(index: number): SDuniteInterface[] {
         let { x, y, b } = this.coordinates(index)
-        return this.xor(this.union(this._xArray[x], this._yArray[y], this._bArray[b]), allNumber)
+        // debugger
+        return this.xor(this.union(this.getBlockArray({ _x: x }), this.getBlockArray({ _y: y }), this.getBlockArray({ _b: b })), allNumber)
     }
 
     //并集
-    union(...arrays: Array<List<number>>): number[] {
-        return _.union(...arrays)
+    union(...arrays: Array<Array<SDuniteInterface>>): SDuniteInterface[] {
+        // unionBy<T>(...arrays: Array<List<T> | null | undefined>,iteratee?: ValueIteratee<T>): T[];
+        let ss = [...arrays||null]
+        return _.unionBy(ss[0]||null,ss[1]||null,ss[2]||null,ss[3]||null, 'num')
+        // return _.unionBy(, 'num')
     }
     //交集
-    intersection(...arrays: Array<List<number>>): number[] {
-        return _.intersection(...arrays)
+    intersection(...arrays: Array<List<SDuniteInterface>>): SDuniteInterface[] {
+        return _.intersectionBy(...arrays, 'num')
     }
     //补集
-    xor(...arrays: Array<List<number>>): number[] {
-        return _.xor(...arrays)
+    xor(...arrays: Array<List<SDuniteInterface>>): SDuniteInterface[] {
+        let ss = [...arrays||null]
+        return _.xorBy(ss[0]||null,ss[1]||null,ss[2]||null,ss[3]||null, 'num')
     }
     // -------------   创建操作
 
@@ -111,69 +110,71 @@ export class SDModel {
         return Math.floor(Math.random() * max)
     }
     createRandomsingle(index: number): number {
-        let fillArray = this.xor(this.getFillArray(index), this._logs[index]||[])
-
+        let fillArray = this.xor(this.getFillArray(index),this._logs[index]||[])
         if (fillArray.length == 0) {
-            //回溯
             this._logs[index] = []
             return -1
         }
         let resultNm = fillArray[this.random(fillArray.length)]
-        if(this._logs[index]){
+        if (this._logs[index] != undefined) {
             this._logs[index].push(resultNm)
-        }else{
-            this._logs = {...this._logs,[index]:[resultNm]}
+        } else {
+            this._logs = { ...this._logs, [index]: [resultNm] }
         }
-        return resultNm
+        return resultNm.num
     }
- 
-    //填充数字
-    fillRaodm() {
+
+    //填充数字 等级0-5 
+    fillRaodm(level:number) {
         this.fullRandom()
-        this._resultArray = _.clone(this._matrixArray)
+        this._resultArray = _.cloneDeep(this._matrixArray)
         let tempArray: number[] = []
-        while(tempArray.length<20){
+        while (tempArray.length < 10+level*5) {
             let randomnum = this.random(this._matrixArray.length)
-            if(tempArray.indexOf(randomnum)==-1){
+            if (tempArray.indexOf(randomnum) == -1) {
                 tempArray.push(randomnum)
-                // let { x, y, b } = this.coordinates(randomnum)
-                this.update(randomnum,this._matrixArray[randomnum],true)
-                this._matrixArray[randomnum] = 0
+                this._matrixArray[randomnum].type = 'blank'
             }
-          
         }
     }
-    fullRandom(){
+    fullRandom() {
+        this._countss++
+        this._shuffleArray = _.shuffle(Array(Math.pow(rolNum,2)).fill(0).map((_,index)=>index))
         this.reset()
         this.next()
     }
     next() {
         if (this._currentIndex < this._matrixArray.length) {
             let num = this.createRandomsingle(this._currentIndex)
-            if (num == -1) {
+            if (num === -1) {
                 this._currentIndex = this._currentIndex - 1
-                this.update(this._currentIndex, num, true)
+                this._matrixArray[this._currentIndex].num = 0
             } else {
-                this._matrixArray[this._currentIndex] = num
-                this.update(this._currentIndex, num)
-                this._currentIndex++
+                this._matrixArray[this._currentIndex].num = num
+                let { x, y, b } = this.coordinates(this._currentIndex) 
+                //动画id 对称
+                this._matrixArray[this._currentIndex].id = [ y*rolNum+x, x*rolNum+y][this._countss%2]
+                //随机
+                this._matrixArray[this._currentIndex].id = this._shuffleArray[this._currentIndex]
+                this._matrixArray[this._currentIndex].id 
+                this._currentIndex = this._currentIndex + 1
             }
             this.next()
         }
     }
-    setIndexNum(index:number,num:number){
-        this._matrixArray[index] = num
-        this.update(index, num)
+    setIndexNum(index: number, num: number) {
+        this._matrixArray[index].num = num
+        this._matrixArray[index].type = 'eide'
     }
     //填充二
     //验证填充数字是否合法
     fillVerification(): { sucess: boolean, index: number, error?: string } {
         let tempindex = -1
         if (this._matrixArray.every((item, index) => {
-            if (item == 0) {
+            if (item.num == 0) {
                 tempindex = index
             }
-            return item != 0
+            return item.num != 0
         })) {
             let sucess = this._matrixArray.every((item, index) => {
                 let s_sucess = this.verificationSinger(index)
@@ -186,33 +187,27 @@ export class SDModel {
         } else {
             return { sucess: false, index: tempindex, error: '还没有填充' }
         }
-        
+
     }
     //结果验证
     verificationSinger(index: number) {
         let tempArray = this.getFillArray(index)
-        return tempArray.length == 0 
+        return tempArray.length == 0
     }
     //填入验证
-    verificationSingerNum(index: number,num:number) {
+    verificationSingerNum(index: number, num: number) {
         let tempArray = this.getFillArray(index)
-        return tempArray.length > 0 && tempArray.indexOf(num)!=-1
+        return tempArray.length > 0 && tempArray.findIndex(item => { return item.num === num}) != -1
     }
     reset() {
-        this._matrixArray.fill(0)
-        this._xArray.forEach(chirden => {
-            chirden.splice(0, chirden.length)
-        })
-        this._yArray.forEach(chirden => {
-            chirden.splice(0, chirden.length)
-        })
-        this._bArray.forEach(chirden => {
-            chirden.splice(0, chirden.length)
-        })
+        this._matrixArray.forEach(item => {
+            item.num = 0
+            item.type = 'init'
+        });
         this._currentIndex = 0
         this._logs = {}
     }
     //解值
-    
+
 
 }

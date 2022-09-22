@@ -1,7 +1,7 @@
 /*
  * @Author: ouxuesen
  * @Date: 2022-04-19 15:45:55
- * @LastEditTime: 2022-04-27 11:10:33
+ * @LastEditTime: 2022-04-29 16:02:31
  * @LastEditors: ouxuesen
  * @Description: 
  * @FilePath: /react-typescript-demo/src/pages/elsfk/elsfk.tsx
@@ -12,14 +12,19 @@ import './index.css'
 import { Button } from "react-bootstrap";
 import NormalBoard, { boardStyle, MvxPor } from './elsfkBoard'
 import { ElsBaseClass, ElsModelClass } from './normal'
-import { ElsBoard, ElsModel_1, ElsModel_2, ElsModel_3, ElsModel_4, ElsModel_5, move, stateType, rotate90 } from "./index";
-import { every } from 'lodash';
-import { keyboardKey } from '@testing-library/user-event';
+import { ElsBoard, ElsModel_1, ElsModel_2, ElsModel_3, ElsModel_4, ElsModel_5, move, stateType, rotate90 } from "./index"
 
 type actiontype = 'update'
 // type stateType = 'start' | 'starting' | 'end'
-
-function reducer(state: { sPoints: { x: number, y: number }[], cPoints: { x: number, y: number }[], mPoints: { x: number, y: number }[], statues: stateType, mvxPor: MvxPor }, action: { type: actiontype, payload: {} }) {
+interface ElsReducePorps {
+  sPoints: { x: number, y: number }[], 
+  cPoints: { x: number, y: number }[], 
+  mPoints: { x: number, y: number }[], 
+  statues: stateType,
+  mvxPor: MvxPor,
+  deleLines?:number[]
+}
+function reducer(state: ElsReducePorps, action: { type: actiontype, payload: {} }) {
   switch (action.type) {
     case 'update':
       return {
@@ -78,6 +83,11 @@ export default function Elsfk() {
         //分数分配低等级
         leavel = Math.floor(currentScoce / 1000) + 1
         setScoceleavel(leavel)
+        dispatch({
+          type: 'update', payload: {
+            deleLines: deleLines
+          }
+        })
         // console.log('恭喜您得分', scoce * 100)
       }
     }
@@ -162,6 +172,7 @@ export default function Elsfk() {
         <div>{state.statues}</div>
         <div>moveblock绝对坐标：{JSON.stringify(state.cPoints)}</div>
         <div>nextModel坐标：{JSON.stringify(state.mPoints)}</div>
+        <div>消除行数：{state.deleLines?.join(' ')}</div>
         <div className='elsfk-continer-board'>
           <div className='score-board'>
             <h6 style={{ textAlign: 'center' }}>看分版</h6>
@@ -177,7 +188,7 @@ export default function Elsfk() {
           <div className='els-board' >
             <NormalBoard key={3} styleBord='overlay' list={[]} mvxPor={state.mvxPor}></NormalBoard>
             {state.statues != 'start' && [
-              <NormalBoard key={4} styleBord='block' list={state.sPoints}></NormalBoard>,
+              <NormalBoard key={4} styleBord='block' list={state.sPoints} deleLines={state.deleLines}></NormalBoard>,
               <NormalBoard key={5} styleBord='moveBlock' list={state.cPoints}></NormalBoard>
             ]}
             <div className='btn-Contienr'>
